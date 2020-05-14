@@ -4,7 +4,7 @@ let guessRemain = 3;
 // 2. when user click the guess , it will fire the function "guess"
 function guessNumber(){
      // 3. grab the value that user typed
-     
+    
     const randomNum = Math.floor(Math.random() * 100) +1
     let userGuess = document.getElementById("user-guess").value
     let resultMessage = '';
@@ -12,21 +12,23 @@ function guessNumber(){
     // Check if userGuess is already in history
     if(history.includes(userGuess)){
         document.getElementById("resultArea").innerHTML = `Try another number`;
-    } else {
-    
+    } 
+    else {
+        
         // 4. compare with the value computer picked with user value
         // 5. if computer number > user num, "too low"
             if(userGuess < randomNum){
-                resultMessage = 'too low';
+                resultMessage = 'Too low';
             }
             // 6. if computer number < user num, "too high"
             else if(userGuess > randomNum){
-                resultMessage = 'too high';
+                resultMessage = 'Too high';
             }
             // 7. if computer number === user num, "correct"
             else if(userGuess == randomNum){
-                resultMessage = 'correct';
+                resultMessage = 'Correct';
             }
+
             
         guessRemain--;
         document.getElementById("user-guess").value = '';
@@ -40,10 +42,20 @@ function guessNumber(){
         // keep history 
         history.push(userGuess)
         // 8. show the result to user 
-        document.getElementById("resultArea").innerHTML = `${resultMessage}`
         document.getElementById("hisArea").innerHTML = `History number: ${history}`
+        document.getElementById("resultArea").innerHTML = `${resultMessage}`
     }
 }
+let time = 0 // time start from 0
+let myTime; // timer will be assign to this variable
+function timecounting() {
+    myTime = setInterval(() => {
+        time += 1
+        document.getElementById('time').innerHTML = `Time count: ${time}`
+    }, 1000)// every 1 second, it will add 1 into time variable (computer use millisecond so 1000 is 1 second)
+}
+
+// fire the timecounting function!!
 
 function reset(){
 
@@ -58,4 +70,10 @@ function reset(){
     document.getElementById("hisArea").innerHTML = `History number: ${history}`
     let resultMessage = '';
     document.getElementById("resultArea").innerHTML = `${resultMessage}`;
+    timeOut()
+    
 }
+
+function timeOut() {
+    clearInterval(myTime);
+  }
